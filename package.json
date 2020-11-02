@@ -10,7 +10,7 @@
     "frontend": "yarn workspace frontend",
     "backend": "yarn workspace backend",
     "proxy": "yarn workspace proxy",
-    "dev": "concurrently --kill-others \"cross-env PORT=9001 CHOKIDAR_USEPOLLING=true yarn frontend dev\" \"yarn backend dev\" \"yarn proxy dev\"",
+    "dev": "concurrently --kill-others \"cross-env PORT=9001 CHOKIDAR_USEPOLLING=true yarn frontend dev\" \"cross-env PORT=9002 yarn backend dev\" \"cross-env PORT=3000 yarn proxy dev\"",
     "build": "concurrently --kill-others-on-fail \"yarn frontend build\" \"yarn backend build\" \"yarn proxy build\""
   },
   "repository": {

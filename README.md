@@ -1,46 +1,49 @@
-# Web Template
+# 支付功能调研
 
-full stack web app including both frontend and backend.
+# 需求
 
-# Author
+1. 支付宝网页支付
+2. 商品、订单、支付管理
+3. 对账
+4. 对公开票
+5. 微信支付
 
-[onichandame](https://onichandame.com)
+依次调研
 
-# Project Structure
+# 调研
 
-```text
-root
-|
---apps
-  |
-  --backend
-  |
-  --frontend
-  |
-  --proxy
-```
+包含调研过程、结果和复现步骤。
 
-- **backend:** GraphQL backend listening on port 9002. can be replaced by any backend app
-- **frontend:** React SPA listening on port 9001. can be replaced by any frontend app
-- **proxy:** Proxy server listening on port 3000. Tunneling requests of `/graphql` to port 9002, other requests to port 9001
+## SDK
 
-The frontend and backend can be run separately or behind the same proxy. See `package.json` for preset commands.
+sdk 是实现所有功能的基础。根据我们的系统架构，应选择与现有的框架及基础设施的兼容性最佳的 sdk。
 
-For small full stack projects, the default backend and the default frontend are enough to work. For larger or collaborative projects it would be better to manage backend and frontend in different repositories. The dev server port and `dev` scripts need to comply with the default.
+### 调研过程
 
-# Usage
+官方提供多语言 sdk([node][nodesdk], [java][javasdk]等)。
 
-- `yarn dev`: start development servers for all apps
-- `yarn build`: build all apps
+- **node:** 老版 sdk，用户和 maintainer 较少。
+- **java:** 新版 sdk，尚不成熟。
 
-# Features
+新版 sdk 现状：
 
-These come with default. Any component can be replaced by whatever you like.
+1. 开票功能尚未提供原生支持，需要回归旧版模式
+2. 尚未提供 node 版本
+3. [阿里未来计划逐步转向新版 sdk][newsdk]
+4. 调用方式更方法化：
 
-1. GraphQL backend
-2. Gatsby frontend
+   ```java
+   // 简化入参，新增方法
+   AlipayTradePrecreateResponse response = AlipaySdk.exec("alipay.trade.pay") // 旧sdk
+   AlipayTradePrecreateResponse response = Payment.FaceToFace()               // 新sdk
+   ```
 
-# Known Issues
+### 调研结果
 
-1. configurations like env are split across many places. need to centralize it.
-2. websocket not proxied
+因现有系统与 node 的兼容性更佳，但新版 sdk 尚不支持 node，且新版 sdk 尚不成熟，对效率提升不明显。故采用旧版 sdk 的 node 版本。需注意跟进阿里对新旧版本 sdk 的支持，前期架构需做好向新版 sdk 迁移的准备。
+
+## 支付宝网页支付
+
+[nodesdk]: https://github.com/alipay/alipay-sdk-nodejs-all
+[javasdk]: https://github.com/alipay/alipay-easysdk/tree/master/java
+[newsdk]: https://opendocs.alipay.com/open/00y8k9

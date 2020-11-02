@@ -12,7 +12,9 @@ import {
   ObjectType,
   buildSchemaSync,
 } from 'type-graphql'
+
 import { greet } from '../service'
+import './alipay'
 
 const friends: string[] = []
 
