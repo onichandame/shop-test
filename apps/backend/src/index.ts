@@ -1,17 +1,13 @@
 import { config } from 'dotenv'
-import Express from 'express'
 
 config()
 
-import { server } from './server'
+import { app, apollo } from './server'
+import './db'
 
 const port = parseInt(process.env.PORT || '') || 3000
 
-const app = Express()
-
-server.applyMiddleware({ app, path: `/` })
-
 app.listen(port, () => {
-  console.log(`🚀 main server ready at ${server.graphqlPath}}`)
-  console.log(`🚀 subscriptions server ready at ${server.subscriptionsPath}}`)
+  console.log(`🚀 main server ready at ${apollo.graphqlPath}}`)
+  console.log(`🚀 subscriptions server ready at ${apollo.subscriptionsPath}}`)
 })

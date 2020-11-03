@@ -1,32 +1,12 @@
-import React, { FC } from "react"
-import { graphql, PageProps } from "gatsby"
-import { gql } from "@apollo/client"
-import { useQuery } from "@apollo/client"
+import React, { FC } from 'react'
+import { PageProps } from 'gatsby'
+import { gql } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 
-import { Image } from "../components/Image"
-import { LocalizedLink } from "../i18n"
+import { Image } from '../components/Image'
+import { LocalizedLink } from '../i18n'
 
-type Props = PageProps<
-  {
-    allMdx: {
-      edges: {
-        node: {
-          frontmatter: {
-            title: string
-          }
-          fields: {
-            name: string
-            locale: string
-          }
-          parent: {
-            relativeDirectory: string
-          }
-        }
-      }[]
-    }
-  },
-  { locale: string }
->
+type Props = PageProps<{ locale: string }>
 
 const Query = gql`
   query greet($name: String!) {
@@ -37,7 +17,7 @@ const Query = gql`
   }
 `
 
-const IndexPage: FC<Props> = ({ data: { allMdx } }) => {
+const IndexPage: FC<Props> = () => {
   const { data, error, loading } = useQuery<
     { greet: { message: string } },
     { name: string }
@@ -61,42 +41,9 @@ const IndexPage: FC<Props> = ({ data: { allMdx } }) => {
           ? data.greet.message
           : `not loaded`}
       </h3>
-      <div>
-        {allMdx.edges.map(({ node: post }) => (
-          <div>
-            <h5>{post.frontmatter.title}</h5>
-            <LocalizedLink to={`posts/${post.parent.relativeDirectory}`}>
-              {post.parent.relativeDirectory}
-            </LocalizedLink>
-          </div>
-        ))}
-      </div>
+      <LocalizedLink to="/pay" />
     </>
   )
 }
 
 export default IndexPage
-
-export const query = graphql`
-  query Toc($locale: String!) {
-    allMdx(filter: { fields: { locale: { eq: $locale } } }) {
-      edges {
-        node {
-          frontmatter {
-            title
-            date
-          }
-          fields {
-            name
-            locale
-          }
-          parent {
-            ... on File {
-              relativeDirectory
-            }
-          }
-        }
-      }
-    }
-  }
-`
