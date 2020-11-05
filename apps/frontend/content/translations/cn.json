@@ -1,6 +1,7 @@
 {
-  "home": "Gatsby模板",
+  "pay": "支付",
+  "home": "C端付费测试",
   "error404": "找不到此网页",
   "error404_desc": "请求的网页不存在",
-  "author": "author"
+  "author": "张筱"
 }

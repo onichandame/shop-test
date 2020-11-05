@@ -1,7 +1,7 @@
-import { useContext } from "react"
-import { graphql, useStaticQuery } from "gatsby"
+import { useContext } from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
 
-import { LocaleContext } from "./LocaleContext"
+import { LocaleContext } from './LocaleContext'
 
 export const useTranslation = (): { [key: string]: string } => {
   const currentLocale = useContext(LocaleContext)
@@ -21,6 +21,7 @@ const query = graphql`
         node {
           name
           translations: childTranslationsJson {
+            pay
             home
             author
             error404

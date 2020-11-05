@@ -1,41 +1,29 @@
-import React, { FC } from "react"
+import React, { FC } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import { Typography, AppBar, Toolbar } from '@material-ui/core'
 
-import { Lang } from "./Lang"
-import { LocalizedLink } from "../../i18n/LocalizedLink"
-import { useTranslation } from "../../i18n"
+import { Lang } from './Lang'
+import { LocalizedLink } from '../../i18n/LocalizedLink'
+import { useTranslation } from '../../i18n'
 
+const useStyles = makeStyles(theme => ({
+  title: {
+    color: theme.palette.text.primary,
+    textDecoration: 'none',
+    flexGrow: 1
+  }
+}))
 export const Header: FC = () => {
+  const styles = useStyles()
   const { home } = useTranslation()
   return (
-    <header
-      style={{
-        background: `rebeccapurple`,
-        marginBottom: `1.45rem`
-      }}
-    >
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `1.45rem 1.0875rem`,
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-around"
-        }}
-      >
-        <h1 style={{ display: "flex", margin: 0 }}>
-          <LocalizedLink
-            to="/"
-            style={{
-              color: `white`,
-              textDecoration: `none`
-            }}
-          >
-            {home}
-          </LocalizedLink>
-        </h1>
+    <AppBar position="static">
+      <Toolbar>
+        <LocalizedLink className={styles.title} to="/">
+          <Typography variant="h6">{home}</Typography>
+        </LocalizedLink>
         <Lang />
-      </div>
-    </header>
+      </Toolbar>
+    </AppBar>
   )
 }

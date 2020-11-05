@@ -1,6 +1,7 @@
 {
-  "home": "Gatsby Template",
+  "pay": "Pay",
+  "home": "2C Online Shop Test",
   "error404": "PAGE NOT FOUND",
   "error404_desc": "You just hit a route that doesn't exist... the sadness.",
-  "author": "author"
+  "author": "Xiao Zhang"
 }

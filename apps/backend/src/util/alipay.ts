@@ -9,4 +9,4 @@ type AlipaySdkPrePayResult = {
 } & AlipaySdkCommonResult
 
 export const isPrePayResult = (raw: any): raw is AlipaySdkPrePayResult =>
-  !!raw && raw.outTradeNo && raw && raw.qrCode && isCommonResult(raw)
+  !!raw && raw.outTradeNo && raw.qrCode && isCommonResult(raw)

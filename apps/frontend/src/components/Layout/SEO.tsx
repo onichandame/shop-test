@@ -1,6 +1,6 @@
-import React, { FC } from "react"
-import { Helmet } from "react-helmet"
-import { useTranslation } from "../../i18n"
+import React, { FC } from 'react'
+import { Helmet } from 'react-helmet'
+import { useTranslation } from '../../i18n'
 
 type Props = {
   title: string
@@ -10,14 +10,14 @@ type Props = {
 }
 
 export const SEO: FC<Props> = ({
-  description = "",
-  lang = "en",
+  description = '',
+  lang = 'en',
   meta = [],
   title
 }) => {
   const { home, author } = useTranslation()
 
-  const metaDescription = description || ""
+  const metaDescription = description || ''
 
   return (
     <Helmet
@@ -60,6 +60,8 @@ export const SEO: FC<Props> = ({
           content: metaDescription
         }
       ].concat(meta)}
-    />
+    >
+      <body style={{ margin: 0, padding: 0 }} />
+    </Helmet>
   )
 }
