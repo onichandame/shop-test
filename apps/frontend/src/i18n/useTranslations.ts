@@ -21,6 +21,7 @@ const query = graphql`
         node {
           name
           translations: childTranslationsJson {
+            bill
             pay
             home
             author

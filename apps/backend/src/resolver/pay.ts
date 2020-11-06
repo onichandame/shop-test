@@ -16,7 +16,7 @@ import { alipay } from './alipay'
 import { isCommonResult, isPrePayResult } from '../util'
 import { db } from '../db'
 
-const logger = debug(`Web:Backend`)
+const logger = debug(`Web:Backend:Resolver:Pay`)
 
 @ArgsType()
 class PayArgs {
